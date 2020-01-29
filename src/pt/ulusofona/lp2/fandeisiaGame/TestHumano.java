@@ -1,0 +1,136 @@
+package pt.ulusofona.lp2.fandeisiaGame;
+
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+
+public class TestHumano {
+    @Test
+    public void TestHumanoMove() throws InsufficientCoinsException {
+        FandeisiaGameManager testeHumano = new FandeisiaGameManager();
+        String humano = "id: 1, type: Humano, teamId: 10, x: 0, y: 1, orientation: Norte";
+        String gold = "id: 10, type: gold, x: 2, y: 2";
+        String silver = "id: 11, type: silver, x: 3, y: 2";
+        String bronze = "id: 12, type: bronze, x: 1, y: 2";
+        String buraco = "id: 6, type: hole, x: 3, y: 3";
+        String bronze2 = "id: 12, type: bronze, x: 4, y: 4";
+        String dragao = "id: 2, type: Dragão, teamId: 20, x: 5, y: 5, orientation: Nordeste";
+        String[] conj = {humano, gold, buraco, silver, bronze, bronze2, dragao};
+        testeHumano.startGame(conj, 7, 7);
+        Creature acriaturaTestada = testeHumano.getCriaturaPorPosicao(0, 1);
+        assert acriaturaTestada != null;
+        acriaturaTestada.estaCongelado = true;
+        acriaturaTestada.moveCriatura();
+        int xEsperado = 0;
+        int pontosEsperado = 0;
+        assertEquals(pontosEsperado, acriaturaTestada.getNrTesouros());
+        assertEquals(xEsperado, acriaturaTestada.getX());
+        acriaturaTestada.estaCongelado = false;
+        acriaturaTestada.moveCriatura();
+        assertEquals(xEsperado, acriaturaTestada.getX());
+        acriaturaTestada.setOrientacao("Norte"); // Conferir Norte
+        acriaturaTestada.setImagemCriatura("Norte");
+        acriaturaTestada.x = 1;
+        acriaturaTestada.y = 4;
+        acriaturaTestada.moveCriatura();
+        int yEsperado = 2;
+        pontosEsperado = 1;
+        assertEquals(pontosEsperado, acriaturaTestada.getNrTesouros());
+        assertEquals(yEsperado, acriaturaTestada.getY());
+        acriaturaTestada.setOrientacao("Norte");
+        acriaturaTestada.setImagemCriatura("Norte");
+        acriaturaTestada.x = 5;
+        acriaturaTestada.y = 6;
+        acriaturaTestada.moveCriatura();
+        xEsperado = 5;
+        assertEquals(xEsperado, acriaturaTestada.getX());
+        acriaturaTestada.setOrientacao("Norte");
+        acriaturaTestada.setImagemCriatura("Norte");
+        acriaturaTestada.x = 3;
+        acriaturaTestada.y = 4;
+        xEsperado = 3;
+        String oriEsperada = "Este";
+        String imgEsperada = "alice_e.png";
+        acriaturaTestada.moveCriatura();
+        assertEquals(xEsperado, acriaturaTestada.getX());
+        assertEquals(oriEsperada, acriaturaTestada.getOrientacao());
+        assertEquals(imgEsperada, acriaturaTestada.getImagePNG());
+        acriaturaTestada.setOrientacao("Sul"); // Conferir Sul
+        acriaturaTestada.setImagemCriatura("Sul");
+        acriaturaTestada.x = 0;
+        acriaturaTestada.y = 6;
+        xEsperado = 0;
+        acriaturaTestada.moveCriatura();
+        assertEquals(xEsperado, acriaturaTestada.getX());
+        acriaturaTestada.setOrientacao("Sul");
+        acriaturaTestada.setImagemCriatura("Sul");
+        acriaturaTestada.x = 3;
+        acriaturaTestada.y = 0;
+        yEsperado = 2;
+        acriaturaTestada.moveCriatura();
+        assertEquals(yEsperado, acriaturaTestada.getY());
+        acriaturaTestada.moveCriatura();
+        assertEquals(yEsperado, acriaturaTestada.getY());
+        acriaturaTestada.setOrientacao("Sul");
+        acriaturaTestada.setImagemCriatura("Sul");
+        acriaturaTestada.x = 5;
+        acriaturaTestada.y = 4;
+        xEsperado = 5;
+        acriaturaTestada.moveCriatura();
+        assertEquals(xEsperado, acriaturaTestada.getX());
+        acriaturaTestada.setOrientacao("Este"); // Conferir Este
+        acriaturaTestada.setImagemCriatura("Este");
+        acriaturaTestada.x = 4;
+        acriaturaTestada.y = 5;
+        xEsperado = 4;
+        acriaturaTestada.moveCriatura();
+        assertEquals(xEsperado, acriaturaTestada.getX());
+        acriaturaTestada.setOrientacao("Este");
+        acriaturaTestada.setImagemCriatura("Este");
+        acriaturaTestada.x = 6;
+        acriaturaTestada.y = 5;
+        xEsperado = 6;
+        acriaturaTestada.moveCriatura();
+        assertEquals(xEsperado, acriaturaTestada.getX());
+        acriaturaTestada.setOrientacao("Este");
+        acriaturaTestada.setImagemCriatura("Este");
+        acriaturaTestada.x = 1;
+        acriaturaTestada.y = 3;
+        xEsperado = 1;
+        acriaturaTestada.moveCriatura();
+        assertEquals(xEsperado, acriaturaTestada.getX());
+        acriaturaTestada.setOrientacao("Este");
+        acriaturaTestada.setImagemCriatura("Este");
+        acriaturaTestada.x = 0;
+        acriaturaTestada.y = 2;
+        xEsperado = 2;
+        acriaturaTestada.moveCriatura();
+        assertEquals(xEsperado, acriaturaTestada.getX());
+        acriaturaTestada.setOrientacao("Oeste"); // Conferir Oeste
+        acriaturaTestada.setImagemCriatura("Oeste");
+        acriaturaTestada.x = 6;
+        acriaturaTestada.y = 4;
+        xEsperado = 4;
+        acriaturaTestada.moveCriatura();
+        assertEquals(xEsperado, acriaturaTestada.getX());
+        acriaturaTestada.x = 6;
+        acriaturaTestada.y = 5;
+        xEsperado = 6;
+        acriaturaTestada.moveCriatura();
+        assertEquals(xEsperado, acriaturaTestada.getX());
+        acriaturaTestada.setOrientacao("Oeste");
+        acriaturaTestada.setImagemCriatura("Oeste");
+        acriaturaTestada.x = 1;
+        acriaturaTestada.y = 4;
+        xEsperado = 1;
+        acriaturaTestada.moveCriatura();
+        assertEquals(xEsperado, acriaturaTestada.getX());
+        acriaturaTestada.setOrientacao("Oeste");
+        acriaturaTestada.setImagemCriatura("Oeste");
+        acriaturaTestada.x = 5;
+        acriaturaTestada.y = 3;
+        xEsperado = 5;
+        acriaturaTestada.moveCriatura();
+        assertEquals(xEsperado, acriaturaTestada.getX());
+    }
+}
